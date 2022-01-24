@@ -8,7 +8,7 @@ curl --connect-timeout 5 \
 { "name":  "mongo-source-CDCTutorial-eventroundtrip",
   "config": {
     "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
-    "connection.uri":"mongodb://mongo1:27017,mongo2:27017,mongo3:27017",
+    "connection.uri":"mongodb://mongo1:27020,mongo2:27020,mongo3:27020",
     "database":"CDCTutorial","collection":"Source"}
 }' http://connect:8083/connectors -w "\n"
 # As this topic does not exist when this script runs, the following command

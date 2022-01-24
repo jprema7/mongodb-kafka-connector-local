@@ -36,6 +36,22 @@ services:
       CONFLUENT_SUPPORT_CUSTOMER_ID: 'anonymous'
       KAFKA_DELETE_TOPIC_ENABLE: "true" 
 
+  schema-registry:
+    image: confluentinc/cp-schema-registry:7.0.1
+    hostname: schema-registry
+    container_name: schema-registry
+    depends_on:
+      - zookeeper
+      - broker
+    ports:
+      - "8081:8081"
+    networks:
+      - localnet
+    environment:
+      SCHEMA_REGISTRY_HOST_NAME: schema-registry
+      SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL: 'zookeeper:2181'
+      SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: 'broker:29092'
+
   connect:
     image: confluentinc/cp-kafka-connect-base:latest
     build:
@@ -70,7 +86,6 @@ services:
       CONNECT_KEY_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
       CONNECT_VALUE_CONVERTER: "org.apache.kafka.connect.json.JsonConverter"
 
-
   rest-proxy:
     image: confluentinc/cp-kafka-rest:latest
     depends_on:
@@ -86,6 +101,30 @@ services:
       KAFKA_REST_HOST_NAME: rest-proxy
       KAFKA_REST_BOOTSTRAP_SERVERS: 'broker:29092'
       KAFKA_REST_LISTENERS: "http://0.0.0.0:8082"
+
+  control-center:
+    image: confluentinc/cp-enterprise-control-center:latest
+    hostname: control-center
+    container_name: control-center
+    depends_on:
+      - zookeeper
+      - broker
+      - schema-registry
+      - connect
+    ports:
+      - "9021:9021"
+    networks:
+      - localnet
+    environment:
+      CONTROL_CENTER_BOOTSTRAP_SERVERS: 'broker:29092'
+      CONTROL_CENTER_ZOOKEEPER_CONNECT: 'zookeeper:2181'
+      CONTROL_CENTER_CONNECT_CLUSTER: 'connect:8083'
+      CONTROL_CENTER_SCHEMA_REGISTRY_URL: "http://schema-registry:8081"
+      CONTROL_CENTER_REPLICATION_FACTOR: 1
+      CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS: 1
+      CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS: 1
+      CONFLUENT_METRICS_TOPIC_REPLICATION: 1
+      PORT: 9021
 
   # Tutorial Client
   tutorial-client:
@@ -110,7 +149,7 @@ services:
     networks:
       - localnet
     ports:
-      - "27017:27017"
+      - "27020:27020"
     restart: always
   mongo2:
     image: "mongo:latest"
@@ -121,7 +160,7 @@ services:
     networks:
       - localnet
     ports:
-      - "27018:27017"
+      - "27018:27020"
     restart: always
   mongo3:
     image: "mongo:latest"
@@ -132,7 +171,7 @@ services:
     networks:
       - localnet
     ports:
-      - "27019:27017"
+      - "27019:27020"
     restart: always
 
 networks:

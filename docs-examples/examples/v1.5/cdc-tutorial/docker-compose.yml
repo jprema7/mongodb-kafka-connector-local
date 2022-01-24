@@ -85,7 +85,7 @@ services:
       [
         "bash",
         "-c",
-        "sleep 10 && mongo --host mongodb://mongo1:27017 config-replica.js && sleep 10 && mongo --host mongodb://mongo1:27017 config-data.js",
+        "sleep 10 && mongo --host mongodb://mongo1:27020 config-replica.js && sleep 10 && mongo --host mongodb://mongo1:27020 config-data.js",
       ]
     restart: "no"
 

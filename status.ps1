@@ -14,4 +14,4 @@ Invoke-RestMethod -Uri http://localhost:8083/connector-plugins | ConvertTo-Json
 #'.[] | select( .class == "com.mongodb.kafka.connect.MongoSourceConnector" or .class == "com.mongodb.kafka.connect.MongoSinkConnector" )'
 
 Write-Host "MongoDB:"
-docker-compose exec mongo1 /usr/bin/mongo localhost:27017 --eval "db.version()"
+docker-compose exec mongo1 /usr/bin/mongo localhost:27020 --eval "db.version()"

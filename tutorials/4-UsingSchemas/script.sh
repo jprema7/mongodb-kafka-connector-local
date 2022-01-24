@@ -18,7 +18,7 @@ curl -X POST -H "Content-Type: application/json" --data '
      "transforms.InsertField.static.field": "Exchange",
      "transforms.InsertField.static.value": "MongoDB",
      "publish.full.document.only": true,
-     "connection.uri":"mongodb://mongo1:27017,mongo2:27017,mongo3:27017",
+     "connection.uri":"mongodb://mongo1:27020,mongo2:27020,mongo3:27020",
      "topic.prefix":"stockdata",
      "database":"Stocks",
      "collection":"StockData"

@@ -17,7 +17,7 @@ function Wait-KeyPress
 function CheckMongoDB
 {
   $ipaddress = "127.0.0.1"
-  $port = 27017
+  $port = 27020
 
 try {
 
@@ -25,7 +25,7 @@ $connection = New-Object System.Net.Sockets.TcpClient($ipaddress, $port)
 
 if ($connection.Connected) {
 
-     Write-Host "MongoDB is running on port 27017, please terminate the local mongod on this port." -ForegroundColor Yellow
+     Write-Host "MongoDB is running on port 27020, please terminate the local mongod on this port." -ForegroundColor Yellow
      Exit 1
   }
 }
@@ -46,7 +46,7 @@ docker-compose up -d --build
 
 Write-Host  "Configuring the MongoDB ReplicaSet."
 
-docker-compose exec mongo1 /usr/bin/mongo --eval "if (rs.status()['ok'] == 0) { rsconf = { _id : 'rs0', members: [ { _id : 0, host : 'mongo1:27017', priority: 1.0 }, { _id : 1, host : 'mongo2:27017', priority: 0.5 }, { _id : 2, host : 'mongo3:27017', priority: 0.5 } ] }; rs.initiate(rsconf); } rs.conf();"
+docker-compose exec mongo1 /usr/bin/mongo --eval "if (rs.status()['ok'] == 0) { rsconf = { _id : 'rs0', members: [ { _id : 0, host : 'mongo1:27020', priority: 1.0 }, { _id : 1, host : 'mongo2:27020', priority: 0.5 }, { _id : 2, host : 'mongo3:27020', priority: 0.5 } ] }; rs.initiate(rsconf); } rs.conf();"
 
 Write-Host  "
 
@@ -54,7 +54,7 @@ Write-Host  "
 
 The following services are running:
 
-MongoDB 3-node cluster available on port 27017, 27018 27019
+MongoDB 3-node cluster available on port 27020, 27018 27019
 Kafka Broker on 9092
 Kafka Zookeeper on 2181
 Kafka Connect on 8083

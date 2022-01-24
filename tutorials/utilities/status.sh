@@ -18,4 +18,4 @@ curl --silent http://connect:8083/connector-plugins | jq -c '.[] | select( .clas
 
 
 # echo "\n\nMongoDB:\n"
-# docker-compose exec mongo1 /usr/bin/mongo localhost:27017 --eval "db.version()"
+# docker-compose exec mongo1 /usr/bin/mongo localhost:27020 --eval "db.version()"

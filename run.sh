@@ -2,8 +2,8 @@
 
 set -e
 (
-if lsof -Pi :27017 -sTCP:LISTEN -t >/dev/null ; then
-    echo "Please terminate the local mongod on 27017"
+if lsof -Pi :27020 -sTCP:LISTEN -t >/dev/null ; then
+    echo "Please terminate the local mongod on 27020"
     exit 1
 fi
 )
@@ -43,9 +43,9 @@ docker-compose exec mongo1 /usr/bin/mongo --eval '''if (rs.status()["ok"] == 0) 
     rsconf = {
       _id : "rs0",
       members: [
-        { _id : 0, host : "mongo1:27017", priority: 1.0 },
-        { _id : 1, host : "mongo2:27017", priority: 0.5 },
-        { _id : 2, host : "mongo3:27017", priority: 0.5 }
+        { _id : 0, host : "mongo1:27020", priority: 1.0 },
+        { _id : 1, host : "mongo2:27020", priority: 0.5 },
+        { _id : 2, host : "mongo3:27020", priority: 0.5 }
       ]
     };
     rs.initiate(rsconf);
@@ -68,7 +68,7 @@ echo '''
 
 The following services are running:
 
-MongoDB 3-node cluster available on port 27017, 27018 27019
+MongoDB 3-node cluster available on port 27020, 27018 27019
 Kafka Broker on 9092
 Kafka Zookeeper on 2181
 Kafka Connect on 8083

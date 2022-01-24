@@ -76,7 +76,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-s","--symbols", type=int, default=5, help="number of financial stock symbols")
     #MongoDB Connector for Apache Kafka requires the source to be a replica set
-    parser.add_argument("-c","--connection",type=str, default='mongodb://mongo1:27017,mongo2:27018,mongo3:27019/?replicaSet=rs0', help="MongoDB connection string")
+    parser.add_argument("-c","--connection",type=str, default='mongodb://mongo1:27020,mongo2:27018,mongo3:27019/?replicaSet=rs0', help="MongoDB connection string")
 
     args = parser.parse_args()
 

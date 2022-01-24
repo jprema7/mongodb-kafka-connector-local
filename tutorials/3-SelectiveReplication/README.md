@@ -36,7 +36,7 @@ curl -X POST -H "Content-Type: application/json" --data '
 {"name":  "mongo-source-tutorial3-eventroundtrip",
 "config": {
 "connector.class":"com.mongodb.kafka.connect.MongoSourceConnector",
-"connection.uri":"mongodb://mongo1:27017,mongo2:27017,mongo3:27017",
+"connection.uri":"mongodb://mongo1:27020,mongo2:27020,mongo3:27020",
 "database":"Tutorial3","collection":"Source"}}'```
 http://localhost:8083/connectors -w "\n" | jq .
 ```
@@ -53,7 +53,7 @@ curl -X POST -H "Content-Type: application/json" --data '
  "tasks.max":"1",
  "topics":"Tutorial3.Source",
 "change.data.capture.handler":"com.mongodb.kafka.connect.sink.cdc.mongodb.ChangeStreamHandler",
-  "connection.uri":"mongodb://mongo1:27017,mongo2:27017,mongo3:27017",
+  "connection.uri":"mongodb://mongo1:27020,mongo2:27020,mongo3:27020",
   "database":"Tutorial3",
 "collection":"Destination"}}' http://localhost:8083/connectors -w "\n" | jq .
 ```
@@ -97,7 +97,7 @@ Version of MongoDB Connector for Apache Kafka installed:
 MongoDB:
 
 MongoDB shell version v4.4.2
-connecting to: mongodb://localhost:27017/test?compressors=disabled&gssapiServiceName=mongodb
+connecting to: mongodb://localhost:27020/test?compressors=disabled&gssapiServiceName=mongodb
 Implicit session: session { "id" : UUID("1ed2c66f-8b76-41f1-b66d-e798ea966526") }
 MongoDB server version: 4.4.2
 4.4.2
@@ -108,7 +108,7 @@ MongoDB server version: 4.4.2
 In this task we will use the Mongo Shell to insert data in the Source collection and read the data that arrived from Kafka in the Desintation collection.
 On **Shell2** connect to the MongoSH via the following:
 
-```mongosh mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0```
+```mongosh mongodb://mongo1:27020,mongo2:27020,mongo3:27020/?replicaSet=rs0```
 
 Next insert some data.
 

@@ -52,7 +52,7 @@ Change Stream is opened on the Tutorial1.orders namespace.  Currently watching .
 
 On **Shell 2**, connect to the local MongoDB cluster and insert data
 
-```mongosh mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0```
+```mongosh mongodb://mongo1:27020,mongo2:27020,mongo3:27020/?replicaSet=rs0```
 
 Once connected:
 
@@ -161,7 +161,7 @@ Upon success, you will see a response from Kafka Connect as follows:
 
 On **Shell 1** make a connection to MongoDB:
 
-```mongosh mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0```
+```mongosh mongodb://mongo1:27020,mongo2:27020,mongo3:27020/?replicaSet=rs0```
 
 Once connected:
 
@@ -245,7 +245,7 @@ curl -X POST -H "Content-Type: application/json" --data '
 
 On **Shell 2** make a connection to MongoDB using Mongsh:
 
-```mongosh mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0```
+```mongosh mongodb://mongo1:27020,mongo2:27020,mongo3:27020/?replicaSet=rs0```
 
 Once connected, insert data into MongoDB:
 
@@ -268,7 +268,7 @@ In cases where you have existing data that is in a collection, you can process t
 
 On **Shell 2** make a connection to MongoDB using Mongsh:
 
-```mongosh mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0```
+```mongosh mongodb://mongo1:27020,mongo2:27020,mongo3:27020/?replicaSet=rs0```
 
 Once connected:
 
@@ -343,7 +343,7 @@ kafkacat -b broker:29092 -t Tutorial1.earthquakes -l -P -T earthquakes.json
 
 On **Shell 2**, connect to Mongo Shell and query for the data.  If you do not already have a connection:
 
-```mongosh mongodb://mongo1:27017,mongo2:27017,mongo3:27017/?replicaSet=rs0```
+```mongosh mongodb://mongo1:27020,mongo2:27020,mongo3:27020/?replicaSet=rs0```
 
 Once connected, insert data into MongoDB:
 
